@@ -308,6 +308,16 @@
                       lexer.TOKEN_OPERATOR,
                       lexer.TOKEN_INT,
                       lexer.TOKEN_VARIABLE_END);
+
+            hasTokens(lexer.lex('{{ 3 ?? 4 ?: 5 }}'), 
+                      lexer.TOKEN_VARIABLE_START,
+                      lexer.TOKEN_INT,
+                      lexer.TOKEN_OPERATOR,
+                      lexer.TOKEN_INT,
+                      lexer.TOKEN_OPERATOR,
+                      lexer.TOKEN_INT,
+                      lexer.TOKEN_VARIABLE_END
+            );
         }),
 
         it('should parse comments', function() {

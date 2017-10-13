@@ -424,6 +424,8 @@
             equal('{{ 9//5 }}', '1');
             equal('{{ 9%5 }}', '4');
             equal('{{ -5 }}', '-5');
+            equal('{{ false ?? null ?? "bar" }}', 'false');
+            equal('{{ 0 ?: "bar" }}', 'bar');
 
             equal('{% if 3 < 4 %}yes{% endif %}', 'yes');
             equal('{% if 3 > 4 %}yes{% endif %}', '');

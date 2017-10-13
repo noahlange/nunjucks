@@ -890,13 +890,31 @@ var Parser = Object.extend({
     },
 
     parsePow: function() {
-        var node = this.parseUnary();
+        var node = this.parseNullCoalesce();
         while(this.skipValue(lexer.TOKEN_OPERATOR, '**')) {
-            var node2 = this.parseUnary();
+            var node2 = this.parseNullCoalesce();
             node = new nodes.Pow(node.lineno,
                                  node.colno,
                                  node,
                                  node2);
+        }
+        return node;
+    },
+
+    parseNullCoalesce: function() {
+        var node = this.parseElvis();
+        while (this.skipValue(lexer.TOKEN_OPERATOR, '??')) {
+            var node2 = this.parseElvis();
+            node = new nodes.NullCoalesce(node.lineno, node.colno, node, node2);
+        }
+        return node;
+    },
+
+    parseElvis: function() {
+        var node = this.parseUnary();
+        while (this.skipValue(lexer.TOKEN_OPERATOR, '?:')) {
+            var node2 = this.parseUnary();
+            node = new nodes.Elvis(node.lineno, node.colno, node, node2);
         }
         return node;
     },

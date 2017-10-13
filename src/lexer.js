@@ -3,7 +3,7 @@
 var lib = require('./lib');
 
 var whitespaceChars = ' \n\t\r\u00A0';
-var delimChars = '()[]{}%*-+~/#,:|.<>=!';
+var delimChars = '()[]{}%*-+~/#,:|.<>=!?';
 var intChars = '0123456789';
 
 var BLOCK_START = '{%';
@@ -164,7 +164,7 @@ Tokenizer.prototype.nextToken = function() {
         else if(delimChars.indexOf(cur) !== -1) {
             // We've hit a delimiter (a special char like a bracket)
             this.forward();
-            var complexOps = ['==', '===', '!=', '!==', '<=', '>=', '//', '**'];
+            var complexOps = ['==', '===', '!=', '!==', '<=', '>=', '//', '**', '?:', '??'];
             var curComplex = cur + this.current();
             var type;
 

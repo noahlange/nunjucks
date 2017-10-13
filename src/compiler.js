@@ -373,6 +373,19 @@ var Compiler = Object.extend({
       this.emit(')');
     },
 
+    compileNullCoalesce: function(node, frame) {
+      this.emit('(');
+      this.compile(node.left, frame);
+      this.emit(' === null || ');
+      this.compile(node.left, frame);  
+      this.emit(' === undefined ? ');
+      this.compile(node.right, frame);
+      this.emit(' : ');
+      this.compile(node.left, frame);
+      this.emit(')');
+    },
+    
+    compileElvis: binOpEmitter(' || '),
     compileOr: binOpEmitter(' || '),
     compileAnd: binOpEmitter(' && '),
     compileAdd: binOpEmitter(' + '),

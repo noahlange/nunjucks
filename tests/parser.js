@@ -217,6 +217,20 @@
                      [nodes.Symbol, 'x'],
                      [[nodes.CompareOperand, [nodes.Symbol, 'y'], '==']]]]]);
 
+            isAST(parser.parse('{{ x ?? y }}'),
+                  [nodes.Root,
+                   [nodes.Output,
+                    [nodes.NullCoalesce,
+                     [nodes.Symbol, 'x'],
+                      [nodes.Symbol, 'y']]]]);
+
+            isAST(parser.parse('{{ x ?: y }}'),
+                  [nodes.Root,
+                   [nodes.Output,
+                    [nodes.Elvis,
+                     [nodes.Symbol, 'x'],
+                      [nodes.Symbol, 'y']]]]);
+
             isAST(parser.parse('{{ x or y }}'),
                   [nodes.Root,
                    [nodes.Output,

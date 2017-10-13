@@ -124,6 +124,8 @@ var Capture = Node.extend('Capture', { fields: ['body'] });
 var TemplateData = Literal.extend('TemplateData');
 var UnaryOp = Node.extend('UnaryOp', { fields: ['target'] });
 var BinOp = Node.extend('BinOp', { fields: ['left', 'right'] });
+var Elvis = BinOp.extend('Elvis');
+var NullCoalesce = BinOp.extend('NullCoalesce');
 var In = BinOp.extend('In');
 var Or = BinOp.extend('Or');
 var And = BinOp.extend('And');
@@ -279,6 +281,8 @@ module.exports = {
     Set: Set,
     LookupVal: LookupVal,
     BinOp: BinOp,
+    Elvis: Elvis,
+    NullCoalesce: NullCoalesce,
     In: In,
     Or: Or,
     And: And,
